@@ -1,0 +1,22 @@
+{
+  "name": "10_chapter3_blog_sql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.6.5",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.24.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.5.1"
+  }
+}
