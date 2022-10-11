@@ -2,6 +2,8 @@
 
 Mongoose 방식 x , mySQL 방식 o
 
+ERD https://drawsql.app/teams/blog-2/diagrams/blog/embed
+
 1. 회원 가입 API
     - 닉네임은 `최소 3자 이상, 알파벳 대소문자(a~z, A~Z), 숫자(0~9)`로 구성하기
     - 비밀번호는 `최소 4자 이상이며, 닉네임과 같은 값이 포함된 경우 회원가입에 실패`로 만들기
