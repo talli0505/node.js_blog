@@ -6,47 +6,41 @@ const {Users} = require("../models");
 // 회원가입 API
 router.post("/sign", async (req, res) => {
   try {
-    // body에서 받아오기
-    const {nickname, password, confirm} = req.body;
+    const {nickname, password, confirm} = req.body;                   // json.body : 닉네임, 비번, 확인 비번 받기
 
     // 아이디와 비번 정규식 표현
     let checkNickname = /^[a-zA-Z0-9]{3,30}$/
     let checkPassword = /^[a-zA-Z0-9]{4,30}$/
 
-
-    // 입력 아이디와 정규식 비교
-    if(!checkNickname.test(nickname)) {
+    if(!checkNickname.test(nickname)) {                              // 입력 아이디와 정규식 비교
       res.status(400).send({
         errorMessage: '아이디를 제대로 입력해주세요'
       })
       return
     }
 
-    // 비밀 번호와 정규식 비교 (중복 거르기)
-    if(!checkPassword.test(password)) {
+    if(!checkPassword.test(password)) {                              // 비밀 번호와 정규식 비교 (중복 거르기)
       res.status(400).send({
         errorMessage: '비밀번호를 제대로 입력해주세요'
       })
       return
     }
-    // 비번이 아이디에 들어가있는 값인 경우
-    if(nickname.includes(password)) {
+  
+    if(nickname.includes(password)) {                               // 비번이 아이디에 들어가있는 값인 경우
       res.status(400).send({
         errorMessage: '아이디와 비밀번호에 같은값이 들어가 있습니다.'
       })
       return
     }
 
-    // 비빌번호 와 한번 더 입력한게 다른 경우
-    if (password !== confirm) {
+    if (password !== confirm) {                                     // 비빌번호 와 한번 더 입력한게 다른 경우
       res.status(400).send({
         errorMessage: "패스워드가 패스워드 확인란과 동일하지 않습니다.",
       });
       return;
     }
 
-    // 닉네임이 사용되는 경우
-    const existUsers = await Users.findAll({
+    const existUsers = await Users.findAll({                        // 닉네임이 사용되는 경우
           where: {
             [Op.or]: [{ nickname } ],
           },
@@ -58,7 +52,7 @@ router.post("/sign", async (req, res) => {
       return;
     }
 
-    const user = new Users({nickname, password });
+    const user = new Users({nickname, password });                  // 생성 및 저장
     await user.save();
 
     res.status(201).send({user});
